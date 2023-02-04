@@ -20,5 +20,19 @@ public class Hw {
   public void setFrontRight () {} //todo
   public void setBackLeft () {} //todo
   public void setBackRight () {} //todo
+
+  public void stopResetFrontLeft () {} //todo
+  public void stopResetFrontRight() {} //todo
+  public void stopResetBackLeft() {} //todo
+  public void stopResetBackRight() {} //todo
   
+  public void encoderMode()
+  {
+    //set all of the motors to RUN_USING_ENCODER
+  }
+
+  public int frontRightTicks() {return 0;} //todo
+  public int frontLeftTicks() {return 0;} //todo
+  public int backRightTicks() {return 0;} //todo
+  public int backLeftTicks() {return 0;} //todo
 }
