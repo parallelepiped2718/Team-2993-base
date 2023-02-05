@@ -1,8 +1,10 @@
-package org.firstipppnpspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.teamcode.mechanisms.Hw;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Hw;
 import java.lang.Math;
 
 @Autonomous(name = "AutonTemplate")
@@ -44,7 +46,7 @@ public class Auton extends LinearOpMode {
       hw.frontRightTicks() +
       hw.frontLeftTicks() +
       hw.backRightTicks() +
-      hw.backRightTicks()())
+      hw.backRightTicks())
       / 4.0;
   }
 
@@ -57,7 +59,7 @@ public class Auton extends LinearOpMode {
       Math.abs(hw.frontRightTicks()) +
       Math.abs(hw.frontLeftTicks()) +
       Math.abs(hw.backRightTicks()) +
-      Math.abs(hw.backRightTicks()()) )
+      Math.abs(hw.backRightTicks()) )
       / 4.0;
   }
 
@@ -120,7 +122,7 @@ public class Auton extends LinearOpMode {
     //reset the encoders and then make sure the runmode is RUN_USING_ENCODER
     hw.stopResetFrontRight();
     hw.stopResetBackRight();
-    hw.stopResetBackLppeft();
+    hw.stopResetBackLeft();
     hw.stopResetFrontLeft();
     hw.encoderMode();
   }
@@ -134,7 +136,7 @@ public class Auton extends LinearOpMode {
   //currently unused
   private double avgLeftTicks()
   {
-    return (double) (hw.frontLeftTicks() + hw.backRightTicks()()) / 2.0;
+    return (double) (hw.frontLeftTicks() + hw.backRightTicks()) / 2.0;
   }
 
   //turn function, math is still kinda iffy so idk if this will work

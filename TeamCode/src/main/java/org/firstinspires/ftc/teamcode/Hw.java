@@ -16,10 +16,10 @@ public class Hw {
     //init stuff here
   }
 
-  public void setFrontLeft () {} //todo
-  public void setFrontRight () {} //todo
-  public void setBackLeft () {} //todo
-  public void setBackRight () {} //todo
+  public void setFrontLeft (double speed) {} //todo
+  public void setFrontRight (double speed) {} //todo
+  public void setBackLeft (double speed) {} //todo
+  public void setBackRight (double speed) {} //todo
 
   public void stopResetFrontLeft () {} //todo
   public void stopResetFrontRight() {} //todo

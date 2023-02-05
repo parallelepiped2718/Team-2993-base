@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.mechanisms.Hw;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Hw;
 
 @TeleOp(name = "MainOpMode")
 public class OpMode1 extends OpMode {
@@ -43,7 +45,7 @@ public class OpMode1 extends OpMode {
     double[] speeds = {
       (drive + strafe + twist),
       (drive - strafe - twist),
-      (drive - strpafe + twist),
+      (drive - strafe + twist),
       (drive + strafe - twist)
     };
 
