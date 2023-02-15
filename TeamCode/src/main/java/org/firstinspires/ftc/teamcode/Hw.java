@@ -10,29 +10,87 @@ import java.lang.Math;
 
 
 public class Hw {
-
+  private DcMotorEx frontRight, backRight, frontLeft, backLeft;
+  private DcMotorEx liftLeft, liftRight;
+  private Servo clawServo;
+  
   public Hw (HardwareMap hwMap)
   {
-    //init stuff here
+    frontRight = hardwareMap.get(DcMotorEx.class, "MotorC0");
+    frontRight.setDirection(DcMotorEx.Direction.REVERSE);
+
+    backRight = hardwareMap.get(DcMotorEx.class, "MotorC1");
+    backRight.setDirection(DcMotorEx.Direction.REVERSE);
+
+    backLeft = hardwareMap.get(DcMotorEx.class, "MotorC2");
+    backLeft.setDirection(DcMotorEx.Direction.FORWARD);
+
+    frontLeft = hardwareMap.get(DcMotorEx.class, "MotorC3");
+    frontLeft.setDirection(DcMotorEx.Direction.FORWARD);
+
+    lift = hardwareMap.get(DcMotorEx.class, "MotorE0");
+    lift.setDirection(DcMotorEx.Direction.REVERSE);
+
+    lift2 = hardwareMap.get(DcMotorEx.class, "MotorE1");
+    lift2.setDirection(DcMotorEx.Direction.FORWARD);
+
+    clawServo = hardwareMap.get(Servo.class, "ServoClaw");
+    clawServo.setDirection(Servo.Direction.FORWARD);
   }
 
-  public void setFrontLeft (double speed) {} //todo
-  public void setFrontRight (double speed) {} //todo
-  public void setBackLeft (double speed) {} //todo
-  public void setBackRight (double speed) {} //todo
+  public void setFrontLeft (double speed)
+  {
+    frontLeft.setPower(speed);
+  }
+  public void setFrontRight (double speed)
+  {
+    frontRight.setPower(speed);
+  }
+  public void setBackLeft (double speed)
+  {
+    backLeft.setPower(speed);
+  }
+  public void setBackRight (double speed)
+  {
+    backRight.setPower(speed);
+  }
 
-  public void stopResetFrontLeft () {} //todo
-  public void stopResetFrontRight() {} //todo
-  public void stopResetBackLeft() {} //todo
-  public void stopResetBackRight() {} //todo
+  public void stopAndReset ()
+  {
+    frontRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    backRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    frontLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    backLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+  }
   
   public void encoderMode()
   {
-    //set all of the motors to RUN_USING_ENCODER
+    frontRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+    backRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+    frontLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+    backLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
   }
 
-  public int frontRightTicks() {return 0;} //todo
-  public int frontLeftTicks() {return 0;} //todo
-  public int backRightTicks() {return 0;} //todo
-  public int backLeftTicks() {return 0;} //todo
+  public int frontRightTicks()
+  {
+    return frontRight.getCurrentPosition();
+  }
+  public int frontLeftTicks()
+  {
+    return frontLeft.getCurrentPosition();
+  }
+  public int backRightTicks()
+  {
+    return backRight.getCurrentPosition();
+  }
+  public int backLeftTicks()
+  {
+    return backLeft.getCurrentPosition();
+  }
+
+  public void setLift(double speed)
+  {
+    liftLeft.setPower(speed);
+    liftRight.setPower(speed);
+  }
 }

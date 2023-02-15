@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+ppackage org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -32,6 +32,9 @@ public class OpMode1 extends OpMode {
 
   @Override
   public void loop() {
+    liftOp();
+    driveOp();
+    handleClaw();
     
     telemetry.update();
   }
@@ -69,5 +72,26 @@ public class OpMode1 extends OpMode {
     hw.setFrontRight(speeds[1]);
     hw.setBackLeft(speeds[2]);
     hw.setBackLeft(speeds[3]);
+  }
+
+  public void handleClaw ()
+  {
+    //make sure that we only invert clawClosed when the button goes from upressed to pressed
+    //do this by keeping track of the last button state
+    if (gamepad1.x && !lastButtonState) clawClosed = !clawClosed;
+
+    if (clawClosed) clawServo.setPosition(clawClosedPos);
+    else clawServo.setPosition(clawOpenPos);
+    lastButtonState = gamepad1.x;
+  }
+
+  // function to handle 4 bar
+  public void liftOp() {
+    double triggers = gamepad1.right_trigger - gamepad1.left_trigger;
+  
+    triggers = Math.abs(deadZoneTriggers) < 0.05 ? 0 : deadZoneTriggers;
+
+    hw.setLiftLeft(triggers * liftSpeed);
+    hw.setLiftRight(triggers * liftSpeed);
   }
 }
