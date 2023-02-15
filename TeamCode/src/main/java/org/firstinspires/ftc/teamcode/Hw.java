@@ -14,7 +14,7 @@ public class Hw {
   private DcMotorEx liftLeft, liftRight;
   private Servo clawServo;
   
-  public Hw (HardwareMap hwMap)
+  public Hw (HardwareMap hardwareMap)
   {
     frontRight = hardwareMap.get(DcMotorEx.class, "MotorC0");
     frontRight.setDirection(DcMotorEx.Direction.REVERSE);
@@ -28,11 +28,11 @@ public class Hw {
     frontLeft = hardwareMap.get(DcMotorEx.class, "MotorC3");
     frontLeft.setDirection(DcMotorEx.Direction.FORWARD);
 
-    lift = hardwareMap.get(DcMotorEx.class, "MotorE0");
-    lift.setDirection(DcMotorEx.Direction.REVERSE);
+    liftLeft = hardwareMap.get(DcMotorEx.class, "MotorE0");
+    liftLeft.setDirection(DcMotorEx.Direction.REVERSE);
 
-    lift2 = hardwareMap.get(DcMotorEx.class, "MotorE1");
-    lift2.setDirection(DcMotorEx.Direction.FORWARD);
+    liftRight = hardwareMap.get(DcMotorEx.class, "MotorE1");
+    liftRight.setDirection(DcMotorEx.Direction.FORWARD);
 
     clawServo = hardwareMap.get(Servo.class, "ServoClaw");
     clawServo.setDirection(Servo.Direction.FORWARD);
@@ -92,5 +92,10 @@ public class Hw {
   {
     liftLeft.setPower(speed);
     liftRight.setPower(speed);
+  }
+  
+  public void setClawPos (double pos)
+  {
+    clawServo.setPosition(pos);
   }
 }

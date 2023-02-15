@@ -1,4 +1,4 @@
-ppackage org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -10,6 +10,13 @@ import org.firstinspires.ftc.teamcode.Hw;
 public class OpMode1 extends OpMode {
   private final ElapsedTime runtime = new ElapsedTime();
   private Hw hw;
+
+  private boolean clawClosed = false;
+  private boolean lastButtonState = false;
+
+  private double clawClosedPos = 0.0;
+  private double clawOpenPos = 1.0;
+  private double liftSpeed = 0.5;
 
   @Override
   public void init() {
@@ -80,8 +87,8 @@ public class OpMode1 extends OpMode {
     //do this by keeping track of the last button state
     if (gamepad1.x && !lastButtonState) clawClosed = !clawClosed;
 
-    if (clawClosed) clawServo.setPosition(clawClosedPos);
-    else clawServo.setPosition(clawOpenPos);
+    if (clawClosed) hw.setClawPos(clawClosedPos);
+    else hw.setClawPos(clawOpenPos);
     lastButtonState = gamepad1.x;
   }
 
@@ -89,9 +96,8 @@ public class OpMode1 extends OpMode {
   public void liftOp() {
     double triggers = gamepad1.right_trigger - gamepad1.left_trigger;
   
-    triggers = Math.abs(deadZoneTriggers) < 0.05 ? 0 : deadZoneTriggers;
+    triggers = Math.abs(triggers) < 0.05 ? 0 : triggers;
 
-    hw.setLiftLeft(triggers * liftSpeed);
-    hw.setLiftRight(triggers * liftSpeed);
+    hw.setLift(triggers * liftSpeed);
   }
 }
