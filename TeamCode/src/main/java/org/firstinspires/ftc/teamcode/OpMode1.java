@@ -78,7 +78,7 @@ public class OpMode1 extends OpMode {
     hw.setFrontLeft(speeds[0]);
     hw.setFrontRight(speeds[1]);
     hw.setBackLeft(speeds[2]);
-    hw.setBackLeft(speeds[3]);
+    hw.setBackRight(speeds[3]);
   }
 
   public void handleClaw ()

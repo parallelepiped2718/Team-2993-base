@@ -42,8 +42,11 @@ public class Auton extends LinearOpMode {
   private void executeAuton()
   {
     goForward(1.0, 24);
+    sleep(1000);
     goForward(1.0, -24);
+    sleep(1000);
     goSideways(1.0, 24);
+    sleep(1000);
     goSideways(1.0, -24);
     sleep(4000);
     
@@ -57,9 +60,9 @@ public class Auton extends LinearOpMode {
     sleep(1000);
     hw.setLift(0);
 
-    hw.setClawPos(1.0);
-    sleep(1000);
     hw.setClawPos(0.0);
+    sleep(1000);
+    hw.setClawPos(1.0);
   }
 
   //average encoder ticks of all the motors, as long as the motors
@@ -151,7 +154,7 @@ public class Auton extends LinearOpMode {
   {
     return (double) (hw.frontRightTicks() + hw.backRightTicks()) / 2.0;
   }
-p
+
   //currently unused
   private double avgLeftTicks()
   {
