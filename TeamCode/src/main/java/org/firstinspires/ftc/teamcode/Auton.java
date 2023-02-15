@@ -36,6 +36,9 @@ public class Auton extends LinearOpMode {
 
     waitForStart();
 
+    hw.stopAndReset();
+    hw.encoderMode();
+    hw.setClawPos(0.0);
     executeAuton();
   }
 
@@ -60,9 +63,11 @@ public class Auton extends LinearOpMode {
     sleep(1000);
     hw.setLift(0);
 
-    hw.setClawPos(0.0);
     sleep(1000);
     hw.setClawPos(1.0);
+    sleep(1000);
+    hw.setClawPos(0.0);
+    sleep(1000);
   }
 
   //average encoder ticks of all the motors, as long as the motors
@@ -128,7 +133,7 @@ public class Auton extends LinearOpMode {
     hw.setFrontRight(sign * speed);
     hw.setBackRight(sign * speed);
     hw.setBackLeft(sign * speed);
-    hw.setFrontLeft(sign *speed);
+    hw.setFrontLeft(sign * speed);
 
     double target = in * cpi; //calculate target
 
