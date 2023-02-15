@@ -41,21 +41,25 @@ public class Auton extends LinearOpMode {
 
   private void executeAuton()
   {
-    goForward(24);
-    goForward(-24);
-    goSideways(24);
-    goSideways(-24);
+    goForward(1.0, 24);
+    goForward(1.0, -24);
+    goSideways(1.0, 24);
+    goSideways(1.0, -24);
     sleep(4000);
     
-    turn(90);
-    turn(-90);
+    turn(0.5, 90);
+    turn(0.5, -90);
     sleep(4000);
     
-    setLift(0.5);
+    hw.setLift(0.5);
     sleep(3000);
-    setLift(-0.5);
+    hw.setLift(-0.5);
     sleep(1000);
-    setLift(0);
+    hw.setLift(0);
+
+    hw.setClawPos(1.0);
+    sleep(1000);
+    hw.setClawPos(0.0);
   }
 
   //average encoder ticks of all the motors, as long as the motors
@@ -138,10 +142,7 @@ public class Auton extends LinearOpMode {
     hw.setFrontLeft(0);
 
     //reset the encoders and then make sure the runmode is RUN_USING_ENCODER
-    hw.stopResetFrontRight();
-    hw.stopResetBackRight();
-    hw.stopResetBackLeft();
-    hw.stopResetFrontLeft();
+    hw.stopAndReset();
     hw.encoderMode();
   }
 
@@ -184,10 +185,7 @@ p
     hw.setFrontLeft(0);
 
     //reset the encoders and then make sure the runmode is RUN_USING_ENCODER
-    hw.stopResetFrontRight();
-    hw.stopResetBackRight();
-    hw.stopResetBackLeft();
-    hw.stopResetFrontLeft();
+    hw.stopAndReset();
     hw.encoderMode();
   }
 }
