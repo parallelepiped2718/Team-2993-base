@@ -22,6 +22,8 @@ public class Auton extends LinearOpMode {
   //if we can't find the servo programmer we will need to set these values to something
   private double clawClosedPos = 0.0f;
   private double clawOpenPos = 1.0f;
+  
+  private double slowDownDist = 2 * cpr; //distance left when robot starts slowing down to stop
 
   @Override
   public void runOpMode()
@@ -112,7 +114,22 @@ public class Auton extends LinearOpMode {
 
     //use absAvgTicks() because 2 wheels are going forward and 2 are going
     //backward, so the average ticks will always be 0
-    while(absAvgTicks() < Math.abs(target)); //wait until we reach target
+    while(absAvgTicks() < Math.abs(target) - slowDownDist); //wait until we reach target
+
+    //slow down gradually before coming to a stop
+    while (Math.abs(avgTicks()) < Math.abs(target))
+    {
+      //value from 0 to 1 indicating how close we are to the target in terms of slowDownDist
+      //so 1 = just entered this loop and 0 = reached the target
+      double curvePosX = Math.abs(target) - Math.abs(avgTicks) / slowDownDist;
+      double curveOutput = -curvePosX + 1; //function y = -x + 1
+      double outputPower = speed * curveOutput;
+
+      hw.setFrontLeft(outputPower);
+      hw.setFrontRight(outputPower);
+      hw.setBackLeft(outputPower);
+      he.setBackRight(outputPower);
+    }
     
     //stop
     hw.setFrontRight(0);
@@ -142,7 +159,22 @@ public class Auton extends LinearOpMode {
     //to go forward and it goes backward for some reason it will still stop after that
     //distance even thought it went the wrong direction
     //we'll have to make sure the motor direction is configured correctly
-    while (Math.abs(avgTicks()) < Math.abs(target)) ;
+    while (Math.abs(avgTicks()) < Math.abs(target) - slowDownDist) ;
+
+    //slow down gradually before coming to a stop
+    while (Math.abs(avgTicks()) < Math.abs(target))
+    {
+      //value from 0 to 1 indicating how close we are to the target in terms of slowDownDist
+      //so 1 = just entered this loop and 0 = reached the target
+      double curvePosX = Math.abs(target) - Math.abs(avgTicks) / slowDownDist;
+      double curveOutput = -curvePosX + 1; //function y = -x + 1
+      double outputPower = speed * curveOutput;
+
+      hw.setFrontLeft(outputPower);
+      hw.setFrontRight(outputPower);
+      hw.setBackLeft(outputPower);
+      he.setBackRight(outputPower);
+    }
 
     //stop
     hw.setFrontRight(0);
