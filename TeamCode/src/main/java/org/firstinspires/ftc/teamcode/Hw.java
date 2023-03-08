@@ -57,14 +57,16 @@ public class Hw {
 
   public void stopAndReset ()
   {
+    frontRight.setPower(0);
+    frontLeft.setPower(0);
+    backRight.setPower(0);
+    backLeft.setPower(0);
+    
     frontRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     backRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     frontLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     backLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-  }
-  
-  public void encoderMode()
-  {
+
     frontRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     backRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     frontLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);

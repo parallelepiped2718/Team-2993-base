@@ -129,17 +129,9 @@ public class Auton extends LinearOpMode {
       hw.setFrontRight(outputPower);
       hw.setBackLeft(outputPower);
       hw.setBackRight(outputPower);
-    }
-    
-    //stop
-    hw.setFrontRight(0);
-    hw.setBackRight(0);
-    hw.setBackLeft(0);
-    hw.setFrontLeft(0);
+    }    
 
-    //reset the encoders and then make sure the runmode is RUN_USING_ENCODER
     hw.stopAndReset();
-    hw.encoderMode();
   }
   
   public void goForward(double speed, int in) {
@@ -176,15 +168,7 @@ public class Auton extends LinearOpMode {
       hw.setBackRight(outputPower);
     }
 
-    //stop
-    hw.setFrontRight(0);
-    hw.setBackRight(0);
-    hw.setBackLeft(0);
-    hw.setFrontLeft(0);
-
-    //reset the encoders and then make sure the runmode is RUN_USING_ENCODER
     hw.stopAndReset();
-    hw.encoderMode();
   }
 
   //currently unused
@@ -219,14 +203,6 @@ public class Auton extends LinearOpMode {
     //then wait until we have moved by that many encoder ticks
     while(absAvgTicks() < Math.abs(target)) ;
 
-    //stop
-    hw.setFrontRight(0);
-    hw.setBackRight(0);
-    hw.setBackLeft(0);
-    hw.setFrontLeft(0);
-
-    //reset the encoders and then make sure the runmode is RUN_USING_ENCODER
     hw.stopAndReset();
-    hw.encoderMode();
   }
 }
