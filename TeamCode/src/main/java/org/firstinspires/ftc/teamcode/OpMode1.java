@@ -46,7 +46,7 @@ public class OpMode1 extends OpMode {
     telemetry.update();
   }
 
-  // function to do turning and movment, supports mekanum wheels
+  // function to do turning and movement, supports mecanum wheels
   public void driveOp() {
     double drive = -gamepad1.left_stick_y;
     double strafe = gamepad1.left_stick_x;
@@ -83,7 +83,7 @@ public class OpMode1 extends OpMode {
 
   public void handleClaw ()
   {
-    //make sure that we only invert clawClosed when the button goes from upressed to pressed
+    //make sure that we only invert clawClosed when the button goes from unpressed to pressed
     //do this by keeping track of the last button state
     if (gamepad1.x && !lastButtonState) clawClosed = !clawClosed;
 

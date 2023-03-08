@@ -117,18 +117,18 @@ public class Auton extends LinearOpMode {
     while(absAvgTicks() < Math.abs(target) - slowDownDist); //wait until we reach target
 
     //slow down gradually before coming to a stop
-    while (absAvgTicks()) < Math.abs(target))
+    while (absAvgTicks() < Math.abs(target))
     {
       //value from 0 to 1 indicating how close we are to the target in terms of slowDownDist
       //so 1 = just entered this loop and 0 = reached the target
-      double curvePosX = Math.abs(target) - absAvgTicks / slowDownDist;
+      double curvePosX = Math.abs(target) - absAvgTicks() / slowDownDist;
       double curveOutput = -curvePosX + 1; //function y = -x + 1
       double outputPower = speed * curveOutput;
 
       hw.setFrontLeft(outputPower);
       hw.setFrontRight(outputPower);
       hw.setBackLeft(outputPower);
-      he.setBackRight(outputPower);
+      hw.setBackRight(outputPower);
     }
     
     //stop
@@ -166,14 +166,14 @@ public class Auton extends LinearOpMode {
     {
       //value from 0 to 1 indicating how close we are to the target in terms of slowDownDist
       //so 1 = just entered this loop and 0 = reached the target
-      double curvePosX = Math.abs(target) - Math.abs(avgTicks) / slowDownDist;
+      double curvePosX = Math.abs(target) - Math.abs(avgTicks()) / slowDownDist;
       double curveOutput = -curvePosX + 1; //function y = -x + 1
       double outputPower = speed * curveOutput;
 
       hw.setFrontLeft(outputPower);
       hw.setFrontRight(outputPower);
       hw.setBackLeft(outputPower);
-      he.setBackRight(outputPower);
+      hw.setBackRight(outputPower);
     }
 
     //stop
@@ -212,7 +212,7 @@ public class Auton extends LinearOpMode {
     hw.setBackLeft(-sign * speed);
     hw.setFrontLeft(-sign *speed);
  
-    //use the arc length forula to convert degrees of turn to inches along the turning circle (the
+    //use the arc length formula to convert degrees of turn to inches along the turning circle (the
     //length of the arc with a measure of the turn angle) and then convert inches to encoder ticks
     double target = degrees * (Math.PI / 180) * turnRadius * cpi;
     
