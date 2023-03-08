@@ -14,8 +14,8 @@ public class Auton extends LinearOpMode {
   public static final int cpr = 1680; //Counts per Revolution
   public static final double cpi = cpr / (4 * Math.PI); //Counts per Inch
 
-  //NOTE: this needs to be measured and assigned first, 4.0 is just an estimate
-  public static final double turnRadius = 7.5; //pin-point turning radius, distance between left and right side / 2
+  //NOTE: this needs to be measured and assigned firs
+  public static final double turnRadius = 16; //pin-point turning diameter, distance between left and right side
 
   private Hw hw;
   
@@ -54,6 +54,7 @@ public class Auton extends LinearOpMode {
     sleep(4000);
     
     turn(0.5, 90);
+    sleep(2000);
     turn(0.5, -90);
     sleep(4000);
     
