@@ -39,7 +39,6 @@ public class Auton extends LinearOpMode {
     waitForStart();
 
     hw.stopAndReset();
-    hw.encoderMode();
     hw.setClawPos(0.0);
     executeAuton();
   }
