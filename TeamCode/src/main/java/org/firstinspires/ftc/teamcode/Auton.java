@@ -46,11 +46,11 @@ public class Auton extends LinearOpMode {
   private void executeAuton()
   {
     goForward(1.0, 24);
-    sleep(1000);
+    sleep(2000);
     goForward(1.0, -24);
-    sleep(1000);
+    sleep(2000);
     goSideways(1.0, 24);
-    sleep(1000);
+    sleep(2000);
     goSideways(1.0, -24);
     sleep(4000);
     
@@ -120,8 +120,9 @@ public class Auton extends LinearOpMode {
     {
       //value from 0 to 1 indicating how close we are to the target in terms of slowDownDist
       //so 1 = just entered this loop and 0 = reached the target
-      double curvePosX = Math.abs(target) - absAvgTicks() / slowDownDist;
-      double curveOutput = -curvePosX + 1; //function y = -x + 1
+      double curvePosX = (Math.abs(target) - absAvgTicks()) / slowDownDist;
+      double curveOutput = curvePosX + 0.1; //function y = x + 0.1, change if needed
+      curveOutput = clamp(curveOutput, 0, 1);
       double outputPower = speed * curveOutput;
 
       hw.setFrontLeft(outputPower);
@@ -150,16 +151,21 @@ public class Auton extends LinearOpMode {
     //to go forward and it goes backward for some reason it will still stop after that
     //distance even thought it went the wrong direction
     //we'll have to make sure the motor direction is configured correctly
-    while (Math.abs(avgTicks()) < Math.abs(target) - slowDownDist) ;
+    while (Math.abs(avgTicks()) < Math.abs(target) - slowDownDist)
+    {telemetry.addData("Going", "forward"); telemetry.update(); }
 
     //slow down gradually before coming to a stop
     while (Math.abs(avgTicks()) < Math.abs(target))
     {
       //value from 0 to 1 indicating how close we are to the target in terms of slowDownDist
       //so 1 = just entered this loop and 0 = reached the target
-      double curvePosX = Math.abs(target) - Math.abs(avgTicks()) / slowDownDist;
-      double curveOutput = -curvePosX + 1; //function y = -x + 1
+      double curvePosX = (Math.abs(target) - Math.abs(avgTicks())) / slowDownDist;
+      double curveOutput = curvePosX + 0.1; //function y = x + 0.1, change if we need something else
+      curveOutput = clamp(curveOutput, 0, 1) * sign;
       double outputPower = speed * curveOutput;
+
+      telemetry.addData("slowing", "down");
+      telemetry.update();
 
       hw.setFrontLeft(outputPower);
       hw.setFrontRight(outputPower);
@@ -167,7 +173,16 @@ public class Auton extends LinearOpMode {
       hw.setBackRight(outputPower);
     }
 
+    telemetry.addData("stoppng", "now");
+    telemetry.update();
     hw.stopAndReset();
+  }
+
+  //todo: move this to some kind of common library that we wrote
+  //the lib could have some other common code aswell
+  private double clamp(double value, double min, double max)
+  {
+    return value < min ? min : (value > max ? max : value);
   }
 
   //currently unused
